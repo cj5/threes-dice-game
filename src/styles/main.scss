@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico|Roboto&display=swap');
+
+$font-heading: 'Pacifico', Helvetica, Arial, sans-serif;
+$font-main: 'Roboto', Helvetica, Arial, sans-serif;
+
+$color-1: #444;
+$color-die: #F11E0A;
+
+$die-size: 65px;
+$spot-size: 16px;
+
+#app {
+  font-family: $font-main;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  justify-content: center;
+  color: $color-1;
+}
+.container {
+  width: 500px;
+}
+.heading-wrapper {
+  text-align: center;
+  padding: 50px 0;
+  margin: 0;
+  h1 {
+    font-size: 40px;
+    font-weight: normal;
+    margin: 0;
+    font-family: $font-heading;
+    line-height: 40px;
+  }
+  h2 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: normal;
+  }
+}
+.gameboard {
+  display: flex;
+  justify-content: space-between;
+}
+.die {
+  border-radius: 6px;
+  width: $die-size;
+  height: $die-size;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: $color-die;
+  color: #fff;
+  font-weight: bold;
+  padding: 6px;
+  box-shadow: 3px 3px 5px $color-die;
+  border-right: 1px solid #D31E0A;
+  border-bottom: 1px solid #D31E0A;
+}
+.spot {
+  position: relative;
+  flex: 0 0 33.3333333%;
+  display: block;
+  opacity: 0;
+  &:before {
+    content: '';
+    box-shadow: inset -3px -3px 4px #ccc;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    width: $spot-size;
+    height: $spot-size;
+    background-color: #fff;
+  }
+}
+.one {
+  .spot-5 {
+    opacity: 1;
+  }
+}
+.two {
+  .spot-1,
+  .spot-9 {
+    opacity: 1;
+  }
+}
+.three {
+  .spot-1,
+  .spot-5,
+  .spot-9 {
+    opacity: 1;
+  }
+}
+.four {
+  .spot-1,
+  .spot-3,
+  .spot-7,
+  .spot-9 {
+    opacity: 1;
+  }
+}
+.five {
+  .spot-1,
+  .spot-3,
+  .spot-5,
+  .spot-7,
+  .spot-9 {
+    opacity: 1;
+  }
+}
+.six {
+  .spot-1,
+  .spot-3,
+  .spot-4,
+  .spot-6,
+  .spot-7,
+  .spot-9 {
+    opacity: 1;
+  }
+}
