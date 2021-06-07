@@ -1,6 +1,6 @@
 <template>
   <div @click="toggleDieSelection">
-    <div class="die" :class="randDieValue">
+    <div class="die">
       <span class="saved-die">Saved</span>
       <span class="spot spot-1"></span>
       <span class="spot spot-2"></span>
@@ -22,29 +22,6 @@ import { mapActions } from 'vuex';
 
 export default {
   name: 'die',
-  data() {
-    return {
-      dieValue: ''
-    }
-  },
-  computed: {
-    randDieValue() {
-      const randValue = Math.floor(Math.random() * 6) + 1
-      if (randValue === 1) {
-        return this.dieValue = 'one'
-      } else if (randValue === 2) {
-        return this.dieValue = 'two'
-      } else if (randValue === 3) {
-        return this.dieValue = 'three'
-      } else if (randValue === 4) {
-        return this.dieValue = 'four'
-      } else if (randValue === 5) {
-        return this.dieValue = 'five'
-      } else if (randValue === 6) {
-        return this.dieValue = 'six'
-      }
-    }
-  },
   methods: {
     ...mapActions([
       'toggleDieSelection'

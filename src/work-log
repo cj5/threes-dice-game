@@ -1,0 +1,30 @@
+=========
+1. Track which dice are saved and carry over to next roll
+
+  - When "roll" btn displays and is clicked, check which els have class "selected" and add a class "saved"
+
+=========
+
+2. Re-roll dice which weren't saved from previous roll
+
+  - When firing new roll, don't re-roll the els with class "saved"
+
+=========
+
+3. Prevent "saved" els from being unselected/unsaved on later rolls
+
+  - if el has "saved" class, don't remove class "selected" + any store data stuff
+
+=========
+
+4. Once 5 dice are selected/saved, tally total score and save
+
+=========
+
+5. Save scores per player and compare to determine rankings
+
+=========
+
+6. Have previous round's loser start the next game
+
+=========
