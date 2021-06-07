@@ -13,6 +13,10 @@ const data = [
     id: 3,
     name: 'Alex'
   },
+  {
+    id: 4,
+    name: 'Callum'
+  },
 ]
 
 @Injectable()
