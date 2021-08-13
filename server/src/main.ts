@@ -3,6 +3,7 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+require('dotenv').config();
 import { AppModule } from './app.module';
 
 async function bootstrap() {
