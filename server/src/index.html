@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Threes Dice Game</title>
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      color: #444;
+      margin: 50px 100px;
+    }
+    .flex {
+      display: flex;
+      align-items: flex-start;
+    }
+    .fdc {
+      flex-direction: column;
+    }
+    #players * {
+      width: 200px;
+      height: 100px;
+      padding: 10px;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Threes Dice Game</h1>
+
+  <div class="flex fdc">
+    <button id="createGameBtn">New game</button>
+    <div style="margin-top: 20px;">
+      <label for="joinGameInput">Game ID:</label>
+      <input type="text" id="joinGameInput">
+      <button id="joinGameBtn">Join game</button>
+    </div>
+    <div id="players" class="flex" style="margin-top: 20px;"></div>
+  </div>
+
+  <script>
+    let clientId;
+    let gameId;
+    let ws = new WebSocket('ws://localhost:5000');
+    const createGameBtn = document.querySelector('#createGameBtn');
+    const joinGameBtn = document.querySelector('#joinGameBtn');
+    const joinGameInput = document.querySelector('#joinGameInput');
+    const playersEl = document.querySelector('#players');
+
+    // Create game
+    createGameBtn.addEventListener('click', e => {
+      const payload = {
+        'method': 'create',
+        'clientId': clientId
+      }
+
+      ws.send(JSON.stringify(payload));
+    });
+
+    // Join game
+    joinGameBtn.addEventListener('click', e => {
+      if (!gameId) {
+        gameId = joinGameInput.value;
+      }
+
+      const payload = {
+        'method': 'join',
+        'clientId': clientId,
+        'gameId': gameId
+      }
+
+      ws.send(JSON.stringify(payload));
+    });
+
+    ws.onmessage = message => {
+      const response = JSON.parse(message.data);
+      // connect
+      if (response.method === 'connect') {
+        clientId = response.clientId;
+        console.log('clientId set:', clientId);
+      }
+
+      // create
+      if (response.method === 'create') {
+        gameId = response.game.id;
+        console.log(`game created with id: ${response.game.id} with ${response.game.balls} balls`);
+      }
+
+      // join
+      if (response.method === 'join') {
+        const game = response.game;
+
+        while(playersEl.firstChild)
+          playersEl.removeChild(playersEl.firstChild);
+
+        game.clients.forEach(c => {
+          const el = document.createElement('div');
+          el.style.background = c.color;
+          el.textContent = c.clientId;
+          playersEl.appendChild(el);
+        });
+      }
+    }
+  </script>
+</body>
+</html>
